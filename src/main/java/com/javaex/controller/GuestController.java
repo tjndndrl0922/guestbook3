@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.dao.GuestBookDao;
 import com.javaex.vo.GuestBookVo;
@@ -52,22 +53,22 @@ public class GuestController {
 	//http://localhost:8088/guestbook3/guest/deleteForm&no=61
 	@RequestMapping(value="/deleteForm/{no}" , method = {RequestMethod.GET,RequestMethod.POST})
 	public String deleteForm(@PathVariable("no") int no) {
-		System.out.println("delete");
+		System.out.println("deleteForm");
 		System.out.println(no);
 	
 		return "deleteForm";
 	}
 	
 	//http://localhost:8088/guestbook3/guest/delete?password=?&no=?
-	@RequestMapping(value="/delete/{no}/{password}", method = {RequestMethod.GET,RequestMethod.POST})
-	public String delete(@PathVariable("no") int no,
-						 @PathVariable("password") String password) {
+	//PathVariable, ModelAttribute, RequestParam no값을 못가져옴.
+	@RequestMapping(value="/delete", method = {RequestMethod.GET,RequestMethod.POST})
+	public String delete(@RequestParam("no") int no,
+						 @RequestParam("password") String password) {
 		System.out.println("delete");
-		
-		GuestBookVo guestVo = new GuestBookVo(no, password);
 		GuestBookDao guestDao = new GuestBookDao();
-	    guestDao.delete(guestVo);
+		GuestBookVo guestVo = new GuestBookVo(no, password);
+		guestDao.delete(guestVo);
 		
-		return "redirect:/guest/addList";
+		return "";
 	}
 }

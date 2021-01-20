@@ -13,7 +13,7 @@
 	<form action="/guestbook3/guest/delete" method="get">
 		 비밀번호<input type="text" name="password">
 		 <button type="submit">확인</button><br>
-		 <input type="text" name="no" value="${Param.no }">
+		 <input type="hidden" name="no" value="${guestVo.no }">
 	</form>
 	 <a href="/guestbook3/guest/addList">메인으로 돌아가기</a>
 </body>
