@@ -34,7 +34,7 @@
 			<td>${vo.no }</td>
 			<td>${vo.name }</td>
 			<td>${vo.regDate }</td>
-			<td><a href="/guestbook3/guest/deleteForm/${vo.no }">삭제</a></td>
+			<td><a href="/guestbook3/guest/deleteForm?${vo.no }">삭제</a></td>
 		</tr>
 		<tr>
 			<td colspan="4">${vo.content }</td>

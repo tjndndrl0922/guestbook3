@@ -50,12 +50,11 @@ public class GuestController {
 		return "redirect:/guest/addList";
 	}
 	
-	//http://localhost:8088/guestbook3/guest/deleteForm&no=61
-	@RequestMapping(value="/deleteForm/{no}" , method = {RequestMethod.GET,RequestMethod.POST})
-	public String deleteForm(@PathVariable("no") int no) {
+	//http://localhost:8088/guestbook3/guest/deleteForm?no=61
+	@RequestMapping(value="/deleteForm" , method = {RequestMethod.GET,RequestMethod.POST})
+	public String deleteForm() {
 		System.out.println("deleteForm");
-		System.out.println(no);
-	
+
 		return "deleteForm";
 	}
 	
@@ -63,12 +62,14 @@ public class GuestController {
 	//PathVariable, ModelAttribute, RequestParam no값을 못가져옴.
 	@RequestMapping(value="/delete", method = {RequestMethod.GET,RequestMethod.POST})
 	public String delete(@RequestParam("no") int no,
-						 @RequestParam("password") String password) {
+			             @RequestParam("password") String password) {
+		
 		System.out.println("delete");
-		GuestBookDao guestDao = new GuestBookDao();
+		
 		GuestBookVo guestVo = new GuestBookVo(no, password);
+		GuestBookDao guestDao = new GuestBookDao();
 		guestDao.delete(guestVo);
 		
-		return "";
+		return "redirect:/guest/addList";
 	}
 }
